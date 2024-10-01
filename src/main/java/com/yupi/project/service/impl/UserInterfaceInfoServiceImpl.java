@@ -2,12 +2,12 @@ package com.yupi.project.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hanis.haniscommon.model.entity.UserInterfaceInfo;
 import com.yupi.project.common.ErrorCode;
 import com.yupi.project.exception.BusinessException;
-import com.yupi.project.model.entity.UserInterfaceInfo;
-import com.yupi.project.service.UserInterfaceInfoService;
 import com.yupi.project.mapper.UserInterfaceInfoMapper;
 import org.springframework.stereotype.Service;
+import com.yupi.project.service.UserInterfaceInfoService;
 
 /**
 * @author Hanne
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 */
 @Service
 public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoMapper, UserInterfaceInfo>
-    implements UserInterfaceInfoService{
+    implements UserInterfaceInfoService {
 
     @Override
     public void validUserInterfaceInfo(UserInterfaceInfo userInterfaceInfo, boolean add) {
@@ -43,7 +43,7 @@ public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoM
         updateWrapper.eq("interfaceInfoId", interfaceInfoId);
         updateWrapper.eq("userId", userId);
         updateWrapper.gt("leftNum", 0);
-        updateWrapper.setSql("leftNum = leftNum + 1, totalNum = totalNum + 1");
+        updateWrapper.setSql("leftNum = leftNum - 1, totalNum = totalNum + 1");
         return this.update(updateWrapper);
     }
 }
